@@ -34,9 +34,9 @@ export function WorkerProfile({
       <div className="bg-white rounded-lg shadow-md p-6 mb-4">
         <div className="flex items-start">
           <div className="bg-gray-100 rounded-full p-3 mr-4 w-20 h-20 flex items-center justify-center overflow-hidden">
-            {worker.avatar ? (
+            {worker.picture ? (
               <img
-                src={worker.avatar}
+                src={worker.picture}
                 alt={worker.name}
                 className="w-full h-full object-cover rounded-full"
               />

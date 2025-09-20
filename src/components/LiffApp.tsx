@@ -26,165 +26,166 @@ export function LiffApp() {
   const [assigningJob, setAssigningJob] = useState(false);
 
   // Sample worker data with additional fields for profile
-  // const workers = [
-  //   {
-  //     id: 1,
-  //     name: "สมชาย ใจดี",
-  //     skill: "ช่างปูน",
-  //     location: "กรุงเทพฯ",
-  //     status: "available",
-  //     rating: 4,
-  //     reviews: [
-  //       {
-  //         id: 1,
-  //         author: "คุณมานี",
-  //         rating: 4,
-  //         text: "ทำงานดี ตรงเวลา",
-  //       },
-  //       {
-  //         id: 2,
-  //         author: "คุณสมศักดิ์",
-  //         rating: 5,
-  //         text: "ฝีมือดีมาก แนะนำ",
-  //       },
-  //     ],
-  //     documents: [
-  //       {
-  //         id: 1,
-  //         name: "บัตรประชาชน",
-  //         type: "id",
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "ใบรับรองฝีมือ",
-  //         type: "certificate",
-  //       },
-  //     ],
-  //     jobs: [],
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "วิชัย รักงาน",
-  //     skill: "ช่างไฟฟ้า",
-  //     location: "นนทบุรี",
-  //     status: "busy",
-  //     rating: 5,
-  //     reviews: [
-  //       {
-  //         id: 1,
-  //         author: "คุณสมหมาย",
-  //         rating: 5,
-  //         text: "ทำงานเรียบร้อย แก้ปัญหาได้ดี",
-  //       },
-  //     ],
-  //     documents: [
-  //       {
-  //         id: 1,
-  //         name: "บัตรประชาชน",
-  //         type: "id",
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "ใบรับรองวิชาชีพ",
-  //         type: "license",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "มานะ ตั้งใจ",
-  //     skill: "ช่างเหล็ก",
-  //     location: "สมุทรปราการ",
-  //     status: "available",
-  //     rating: 3,
-  //     reviews: [
-  //       {
-  //         id: 1,
-  //         author: "คุณวิชัย",
-  //         rating: 3,
-  //         text: "งานพอใช้ได้ แต่ล่าช้า",
-  //       },
-  //     ],
-  //     documents: [
-  //       {
-  //         id: 1,
-  //         name: "บัตรประชาชน",
-  //         type: "id",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "สมศักดิ์ พากเพียร",
-  //     skill: "ช่างไม้",
-  //     location: "ปทุมธานี",
-  //     status: "busy",
-  //     rating: 4,
-  //     reviews: [
-  //       {
-  //         id: 1,
-  //         author: "คุณสมชาย",
-  //         rating: 4,
-  //         text: "ทำงานดี",
-  //       },
-  //       {
-  //         id: 2,
-  //         author: "คุณวิไล",
-  //         rating: 4,
-  //         text: "งานเรียบร้อย",
-  //       },
-  //     ],
-  //     documents: [
-  //       {
-  //         id: 1,
-  //         name: "บัตรประชาชน",
-  //         type: "id",
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "ใบอนุญาตขับขี่",
-  //         type: "license",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "จิรายุ ชำนาญงาน",
-  //     skill: "ช่างปูน",
-  //     location: "กรุงเทพฯ",
-  //     status: "available",
-  //     rating: 5,
-  //     reviews: [
-  //       {
-  //         id: 1,
-  //         author: "คุณพิชัย",
-  //         rating: 5,
-  //         text: "ทำงานดีมาก ละเอียด",
-  //       },
-  //       {
-  //         id: 2,
-  //         author: "คุณสมศรี",
-  //         rating: 5,
-  //         text: "บริการดีเยี่ยม แนะนำ",
-  //       },
-  //     ],
-  //     documents: [
-  //       {
-  //         id: 1,
-  //         name: "บัตรประชาชน",
-  //         type: "id",
-  //       },
-  //       {
-  //         id: 2,
-  //         name: "ใบรับรองฝีมือ",
-  //         type: "certificate",
-  //       },
-  //     ],
-  //   },
-  // ];
+  const workersMock = [
+    {
+      id: 1,
+      name: "สมชาย ใจดี",
+      skill: "ช่างปูน",
+      location: "กรุงเทพฯ",
+      status: "available",
+      rating: 4,
+      reviews: [
+        {
+          id: 1,
+          author: "คุณมานี",
+          rating: 4,
+          text: "ทำงานดี ตรงเวลา",
+        },
+        {
+          id: 2,
+          author: "คุณสมศักดิ์",
+          rating: 5,
+          text: "ฝีมือดีมาก แนะนำ",
+        },
+      ],
+      documents: [
+        {
+          id: 1,
+          name: "บัตรประชาชน",
+          type: "id",
+        },
+        {
+          id: 2,
+          name: "ใบรับรองฝีมือ",
+          type: "certificate",
+        },
+      ],
+      jobs: [],
+    },
+    {
+      id: 2,
+      name: "วิชัย รักงาน",
+      skill: "ช่างไฟฟ้า",
+      location: "นนทบุรี",
+      status: "busy",
+      rating: 5,
+      reviews: [
+        {
+          id: 1,
+          author: "คุณสมหมาย",
+          rating: 5,
+          text: "ทำงานเรียบร้อย แก้ปัญหาได้ดี",
+        },
+      ],
+      documents: [
+        {
+          id: 1,
+          name: "บัตรประชาชน",
+          type: "id",
+        },
+        {
+          id: 2,
+          name: "ใบรับรองวิชาชีพ",
+          type: "license",
+        },
+      ],
+    },
+    {
+      id: 3,
+      name: "มานะ ตั้งใจ",
+      skill: "ช่างเหล็ก",
+      location: "สมุทรปราการ",
+      status: "available",
+      rating: 3,
+      reviews: [
+        {
+          id: 1,
+          author: "คุณวิชัย",
+          rating: 3,
+          text: "งานพอใช้ได้ แต่ล่าช้า",
+        },
+      ],
+      documents: [
+        {
+          id: 1,
+          name: "บัตรประชาชน",
+          type: "id",
+        },
+      ],
+    },
+    {
+      id: 4,
+      name: "สมศักดิ์ พากเพียร",
+      skill: "ช่างไม้",
+      location: "ปทุมธานี",
+      status: "busy",
+      rating: 4,
+      reviews: [
+        {
+          id: 1,
+          author: "คุณสมชาย",
+          rating: 4,
+          text: "ทำงานดี",
+        },
+        {
+          id: 2,
+          author: "คุณวิไล",
+          rating: 4,
+          text: "งานเรียบร้อย",
+        },
+      ],
+      documents: [
+        {
+          id: 1,
+          name: "บัตรประชาชน",
+          type: "id",
+        },
+        {
+          id: 2,
+          name: "ใบอนุญาตขับขี่",
+          type: "license",
+        },
+      ],
+    },
+    {
+      id: 5,
+      name: "จิรายุ ชำนาญงาน",
+      skill: "ช่างปูน",
+      location: "กรุงเทพฯ",
+      status: "available",
+      rating: 5,
+      reviews: [
+        {
+          id: 1,
+          author: "คุณพิชัย",
+          rating: 5,
+          text: "ทำงานดีมาก ละเอียด",
+        },
+        {
+          id: 2,
+          author: "คุณสมศรี",
+          rating: 5,
+          text: "บริการดีเยี่ยม แนะนำ",
+        },
+      ],
+      documents: [
+        {
+          id: 1,
+          name: "บัตรประชาชน",
+          type: "id",
+        },
+        {
+          id: 2,
+          name: "ใบรับรองฝีมือ",
+          type: "certificate",
+        },
+      ],
+    },
+  ];
 
   // const workers: Worker[] = [];
-  const [workers, setWorkers] = useState<Worker[]>([]);
+  // const [workers, setWorkers] = useState<Worker[]>([]);
+  const [workers, setWorkers] = useState<any[]>([]);
 
   interface Review {
     id: number;
@@ -235,7 +236,18 @@ export function LiffApp() {
       status: "available",
       rating: 0,
       reviews: [],
-      documents: [],
+      documents: [
+        {
+          id: 1,
+          name: "บัตรประชาชน",
+          type: "id",
+        },
+        {
+          id: 2,
+          name: "ใบรับรองฝีมือ",
+          type: "certificate",
+        },
+      ],
     };
 
     try {
@@ -270,6 +282,18 @@ export function LiffApp() {
       }
     } catch (err) {
       console.error("Error:", err);
+    }
+
+    // call fetch workers again
+    try {
+      setLoading(true);
+      const res = await fetch("/api/workers");
+      const data = await res.json();
+      setWorkers(data);
+    } catch (err) {
+      console.error("Fetch workers error:", err);
+    } finally {
+      setLoading(false);
     }
 
     // == reset form register ==
@@ -307,30 +331,30 @@ export function LiffApp() {
   const [loading, setLoading] = useState(false);
 
   // === LIFF connect Line account ===
-  useEffect(() => {
-    const initLiff = async () => {
-      try {
-        await liff.init({ liffId: "2008132085-Ex4bOk3P" });
-        if (liff.isLoggedIn()) {
-          const userInfoFromLine = await liff.getProfile();
-          console.log("userInfoFromLine", userInfoFromLine);
-          setLineAccount({
-            name: userInfoFromLine.displayName,
-            picture: userInfoFromLine.pictureUrl || "",
-            userId: userInfoFromLine.userId || "",
-          });
-        } else {
-          liff.login();
-        }
-      } catch (err) {
-        console.error("LIFF init error:", err);
-      }
-    };
-    initLiff();
-  }, []);
+  // useEffect(() => {
+  //   const initLiff = async () => {
+  //     try {
+  //       await liff.init({ liffId: "2008132085-Ex4bOk3P" });
+  //       if (liff.isLoggedIn()) {
+  //         const userInfoFromLine = await liff.getProfile();
+  //         console.log("userInfoFromLine", userInfoFromLine);
+  //         setLineAccount({
+  //           name: userInfoFromLine.displayName,
+  //           picture: userInfoFromLine.pictureUrl || "",
+  //           userId: userInfoFromLine.userId || "",
+  //         });
+  //       } else {
+  //         liff.login();
+  //       }
+  //     } catch (err) {
+  //       console.error("LIFF init error:", err);
+  //     }
+  //   };
+  //   initLiff();
+  // }, []);
 
   useEffect(() => {
-    if (!lineAccount) return;
+    // if (!lineAccount) return;
     const loadWorkers = async () => {
       try {
         setLoading(true);

@@ -1,6 +1,12 @@
 import mongoose from "mongoose";
 
 const { Schema, model, models } = mongoose;
+interface Review {
+  id: number;
+  author: string;
+  rating: number;
+  text: string;
+}
 
 const WorkerSchema = new Schema(
   {
@@ -11,6 +17,13 @@ const WorkerSchema = new Schema(
     picture: { type: String, required: true },
     status: { type: String, default: "Available" },
     rating: { type: Number, default: 4.5 },
+    reviews: { type: [Object] as unknown as Review[], default: [] },
+    documents: [
+      {
+        name: String,
+        url: String,
+      },
+    ],
   },
   { timestamps: true }
 );
