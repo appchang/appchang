@@ -331,30 +331,30 @@ export function LiffApp() {
   const [loading, setLoading] = useState(false);
 
   // === LIFF connect Line account ===
-  // useEffect(() => {
-  //   const initLiff = async () => {
-  //     try {
-  //       await liff.init({ liffId: "2008132085-Ex4bOk3P" });
-  //       if (liff.isLoggedIn()) {
-  //         const userInfoFromLine = await liff.getProfile();
-  //         console.log("userInfoFromLine", userInfoFromLine);
-  //         setLineAccount({
-  //           name: userInfoFromLine.displayName,
-  //           picture: userInfoFromLine.pictureUrl || "",
-  //           userId: userInfoFromLine.userId || "",
-  //         });
-  //       } else {
-  //         liff.login();
-  //       }
-  //     } catch (err) {
-  //       console.error("LIFF init error:", err);
-  //     }
-  //   };
-  //   initLiff();
-  // }, []);
+  useEffect(() => {
+    const initLiff = async () => {
+      try {
+        await liff.init({ liffId: "2008132085-Ex4bOk3P" });
+        if (liff.isLoggedIn()) {
+          const userInfoFromLine = await liff.getProfile();
+          console.log("userInfoFromLine", userInfoFromLine);
+          setLineAccount({
+            name: userInfoFromLine.displayName,
+            picture: userInfoFromLine.pictureUrl || "",
+            userId: userInfoFromLine.userId || "",
+          });
+        } else {
+          liff.login();
+        }
+      } catch (err) {
+        console.error("LIFF init error:", err);
+      }
+    };
+    initLiff();
+  }, []);
 
   useEffect(() => {
-    // if (!lineAccount) return;
+    if (!lineAccount) return;
     const loadWorkers = async () => {
       try {
         setLoading(true);
