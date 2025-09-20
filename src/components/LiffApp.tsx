@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import liff from "@line/liff";
 import {
   UserIcon,
   ClipboardListIcon,
@@ -20,168 +21,197 @@ export function LiffApp() {
     location: "",
   });
   // State to toggle between views
-  const [activeView, setActiveView] = useState("dashboard");
-  // State for selected worker
+  const [activeView, setActiveView] = useState("formRegister");
   const [selectedWorkerId, setSelectedWorkerId] = useState(null);
-  // State for job assignment
   const [assigningJob, setAssigningJob] = useState(false);
+
   // Sample worker data with additional fields for profile
-  const workers = [
-    {
-      id: 1,
-      name: "สมชาย ใจดี",
-      skill: "ช่างปูน",
-      location: "กรุงเทพฯ",
-      status: "available",
-      rating: 4,
-      reviews: [
-        {
-          id: 1,
-          author: "คุณมานี",
-          rating: 4,
-          text: "ทำงานดี ตรงเวลา",
-        },
-        {
-          id: 2,
-          author: "คุณสมศักดิ์",
-          rating: 5,
-          text: "ฝีมือดีมาก แนะนำ",
-        },
-      ],
-      documents: [
-        {
-          id: 1,
-          name: "บัตรประชาชน",
-          type: "id",
-        },
-        {
-          id: 2,
-          name: "ใบรับรองฝีมือ",
-          type: "certificate",
-        },
-      ],
-      jobs: [],
-    },
-    {
-      id: 2,
-      name: "วิชัย รักงาน",
-      skill: "ช่างไฟฟ้า",
-      location: "นนทบุรี",
-      status: "busy",
-      rating: 5,
-      reviews: [
-        {
-          id: 1,
-          author: "คุณสมหมาย",
-          rating: 5,
-          text: "ทำงานเรียบร้อย แก้ปัญหาได้ดี",
-        },
-      ],
-      documents: [
-        {
-          id: 1,
-          name: "บัตรประชาชน",
-          type: "id",
-        },
-        {
-          id: 2,
-          name: "ใบรับรองวิชาชีพ",
-          type: "license",
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: "มานะ ตั้งใจ",
-      skill: "ช่างเหล็ก",
-      location: "สมุทรปราการ",
-      status: "available",
-      rating: 3,
-      reviews: [
-        {
-          id: 1,
-          author: "คุณวิชัย",
-          rating: 3,
-          text: "งานพอใช้ได้ แต่ล่าช้า",
-        },
-      ],
-      documents: [
-        {
-          id: 1,
-          name: "บัตรประชาชน",
-          type: "id",
-        },
-      ],
-    },
-    {
-      id: 4,
-      name: "สมศักดิ์ พากเพียร",
-      skill: "ช่างไม้",
-      location: "ปทุมธานี",
-      status: "busy",
-      rating: 4,
-      reviews: [
-        {
-          id: 1,
-          author: "คุณสมชาย",
-          rating: 4,
-          text: "ทำงานดี",
-        },
-        {
-          id: 2,
-          author: "คุณวิไล",
-          rating: 4,
-          text: "งานเรียบร้อย",
-        },
-      ],
-      documents: [
-        {
-          id: 1,
-          name: "บัตรประชาชน",
-          type: "id",
-        },
-        {
-          id: 2,
-          name: "ใบอนุญาตขับขี่",
-          type: "license",
-        },
-      ],
-    },
-    {
-      id: 5,
-      name: "จิรายุ ชำนาญงาน",
-      skill: "ช่างปูน",
-      location: "กรุงเทพฯ",
-      status: "available",
-      rating: 5,
-      reviews: [
-        {
-          id: 1,
-          author: "คุณพิชัย",
-          rating: 5,
-          text: "ทำงานดีมาก ละเอียด",
-        },
-        {
-          id: 2,
-          author: "คุณสมศรี",
-          rating: 5,
-          text: "บริการดีเยี่ยม แนะนำ",
-        },
-      ],
-      documents: [
-        {
-          id: 1,
-          name: "บัตรประชาชน",
-          type: "id",
-        },
-        {
-          id: 2,
-          name: "ใบรับรองฝีมือ",
-          type: "certificate",
-        },
-      ],
-    },
-  ];
+  // const workers = [
+  //   {
+  //     id: 1,
+  //     name: "สมชาย ใจดี",
+  //     skill: "ช่างปูน",
+  //     location: "กรุงเทพฯ",
+  //     status: "available",
+  //     rating: 4,
+  //     reviews: [
+  //       {
+  //         id: 1,
+  //         author: "คุณมานี",
+  //         rating: 4,
+  //         text: "ทำงานดี ตรงเวลา",
+  //       },
+  //       {
+  //         id: 2,
+  //         author: "คุณสมศักดิ์",
+  //         rating: 5,
+  //         text: "ฝีมือดีมาก แนะนำ",
+  //       },
+  //     ],
+  //     documents: [
+  //       {
+  //         id: 1,
+  //         name: "บัตรประชาชน",
+  //         type: "id",
+  //       },
+  //       {
+  //         id: 2,
+  //         name: "ใบรับรองฝีมือ",
+  //         type: "certificate",
+  //       },
+  //     ],
+  //     jobs: [],
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "วิชัย รักงาน",
+  //     skill: "ช่างไฟฟ้า",
+  //     location: "นนทบุรี",
+  //     status: "busy",
+  //     rating: 5,
+  //     reviews: [
+  //       {
+  //         id: 1,
+  //         author: "คุณสมหมาย",
+  //         rating: 5,
+  //         text: "ทำงานเรียบร้อย แก้ปัญหาได้ดี",
+  //       },
+  //     ],
+  //     documents: [
+  //       {
+  //         id: 1,
+  //         name: "บัตรประชาชน",
+  //         type: "id",
+  //       },
+  //       {
+  //         id: 2,
+  //         name: "ใบรับรองวิชาชีพ",
+  //         type: "license",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "มานะ ตั้งใจ",
+  //     skill: "ช่างเหล็ก",
+  //     location: "สมุทรปราการ",
+  //     status: "available",
+  //     rating: 3,
+  //     reviews: [
+  //       {
+  //         id: 1,
+  //         author: "คุณวิชัย",
+  //         rating: 3,
+  //         text: "งานพอใช้ได้ แต่ล่าช้า",
+  //       },
+  //     ],
+  //     documents: [
+  //       {
+  //         id: 1,
+  //         name: "บัตรประชาชน",
+  //         type: "id",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "สมศักดิ์ พากเพียร",
+  //     skill: "ช่างไม้",
+  //     location: "ปทุมธานี",
+  //     status: "busy",
+  //     rating: 4,
+  //     reviews: [
+  //       {
+  //         id: 1,
+  //         author: "คุณสมชาย",
+  //         rating: 4,
+  //         text: "ทำงานดี",
+  //       },
+  //       {
+  //         id: 2,
+  //         author: "คุณวิไล",
+  //         rating: 4,
+  //         text: "งานเรียบร้อย",
+  //       },
+  //     ],
+  //     documents: [
+  //       {
+  //         id: 1,
+  //         name: "บัตรประชาชน",
+  //         type: "id",
+  //       },
+  //       {
+  //         id: 2,
+  //         name: "ใบอนุญาตขับขี่",
+  //         type: "license",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "จิรายุ ชำนาญงาน",
+  //     skill: "ช่างปูน",
+  //     location: "กรุงเทพฯ",
+  //     status: "available",
+  //     rating: 5,
+  //     reviews: [
+  //       {
+  //         id: 1,
+  //         author: "คุณพิชัย",
+  //         rating: 5,
+  //         text: "ทำงานดีมาก ละเอียด",
+  //       },
+  //       {
+  //         id: 2,
+  //         author: "คุณสมศรี",
+  //         rating: 5,
+  //         text: "บริการดีเยี่ยม แนะนำ",
+  //       },
+  //     ],
+  //     documents: [
+  //       {
+  //         id: 1,
+  //         name: "บัตรประชาชน",
+  //         type: "id",
+  //       },
+  //       {
+  //         id: 2,
+  //         name: "ใบรับรองฝีมือ",
+  //         type: "certificate",
+  //       },
+  //     ],
+  //   },
+  // ];
+
+  // const workers: Worker[] = [];
+  const [workers, setWorkers] = useState<Worker[]>([]);
+
+  interface Review {
+    id: number;
+    author: string;
+    rating: number;
+    text: string;
+  }
+
+  interface Document {
+    id: number;
+    name: string;
+    type: string; // หรือใช้ union: "id" | "license"
+  }
+
+  interface Worker {
+    id?: string;
+    userId: string;
+    picture: string;
+    name: string;
+    skill: string;
+    location: string;
+    status: "available" | "busy" | "offline"; // ใช้ union type จะชัดกว่า
+    rating: number;
+    reviews: Review[];
+    documents: Document[];
+  }
+
   // Handle form input changes
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -191,9 +221,58 @@ export function LiffApp() {
     });
   };
   // Handle form submission
-  const handleSubmit = (e: any) => {
+  const submitRegister = async (e: any) => {
     e.preventDefault();
-    console.log("Form submitted:", formValues);
+
+    const newWorker: Worker = {
+      userId: lineAccount?.userId || "Ua2a34857a8072dde0e34f1ae2eb8f01d",
+      name: formValues.fullName,
+      skill: formValues.skill,
+      location: formValues.location,
+      picture:
+        lineAccount?.picture ||
+        "https://profile.line-scdn.net/0hIrNdtp34Fl1jHT_T95JoIhNNFTdAbE9PGChROAQdGD9fKgJcGC5YPwFNGzpXelZbHSlfPlQcHDlvDmE7fUvqaWQtS2xfJFEJTHpQvw",
+      status: "available",
+      rating: 0,
+      reviews: [],
+      documents: [],
+    };
+
+    try {
+      const res = await fetch("/api/workers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...newWorker,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to register worker");
+      }
+      try {
+        const res = await fetch("/api/line/push", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: newWorker.userId,
+            message: `ลงทะเบียนสำเร็จ!\nชื่อ: ${newWorker.name}\nทักษะ: ${newWorker.skill}\nพื้นที่ทำงาน: ${newWorker.location}`,
+          }),
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error || "Failed to send LINE message");
+        }
+      } catch (err) {
+        console.error("Error:", err);
+      }
+    } catch (err) {
+      console.error("Error:", err);
+    }
+
+    // == reset form register ==
     setFormValues({
       fullName: "",
       skill: "",
@@ -214,6 +293,59 @@ export function LiffApp() {
   // Get selected worker
   const selectedWorker: any =
     workers.find((worker) => worker.id === selectedWorkerId) || workers[0];
+
+  interface lineAccountType {
+    name: string;
+    picture: string;
+    userId: string;
+  }
+
+  // === LIFF ===
+  const [lineAccount, setLineAccount] = useState<lineAccountType | null>(null);
+
+  // === Library ===
+  const [loading, setLoading] = useState(false);
+
+  // === LIFF connect Line account ===
+  useEffect(() => {
+    const initLiff = async () => {
+      try {
+        await liff.init({ liffId: "2008132085-Ex4bOk3P" });
+        if (liff.isLoggedIn()) {
+          const userInfoFromLine = await liff.getProfile();
+          console.log("userInfoFromLine", userInfoFromLine);
+          setLineAccount({
+            name: userInfoFromLine.displayName,
+            picture: userInfoFromLine.pictureUrl || "",
+            userId: userInfoFromLine.userId || "",
+          });
+        } else {
+          liff.login();
+        }
+      } catch (err) {
+        console.error("LIFF init error:", err);
+      }
+    };
+    initLiff();
+  }, []);
+
+  useEffect(() => {
+    if (!lineAccount) return;
+    const loadWorkers = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch("/api/workers");
+        const data = await res.json();
+        setWorkers(data);
+      } catch (err) {
+        console.error("Fetch workers error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadWorkers();
+  }, [lineAccount]);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex flex-col">
       {/* Header */}
@@ -224,13 +356,13 @@ export function LiffApp() {
 
       {/* Main Content */}
       <main className="flex-grow px-4 py-6 max-w-lg mx-auto w-full">
-        {activeView === "form" && (
+        {activeView === "formRegister" && (
           <div className="mb-6">
             <div className="bg-white rounded-lg shadow-md p-6">
               <h2 className="text-xl font-semibold mb-5 text-gray-800">
                 ลงทะเบียนแรงงาน
               </h2>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={submitRegister}>
                 <div className="mb-4">
                   <label
                     htmlFor="fullName"
@@ -376,9 +508,9 @@ export function LiffApp() {
       <nav className="bg-white shadow-lg px-4 py-3 sticky bottom-0 border-t border-gray-200">
         <div className="flex space-x-4">
           <button
-            onClick={() => setActiveView("form")}
+            onClick={() => setActiveView("formRegister")}
             className={`flex-1 py-2.5 rounded-lg font-medium text-center shadow-sm flex items-center justify-center ${
-              activeView === "form"
+              activeView === "formRegister"
                 ? "bg-gradient-to-r from-[#0061A8] to-[#1E88E5] text-white"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}

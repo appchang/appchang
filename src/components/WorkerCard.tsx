@@ -7,7 +7,7 @@ export function WorkerCard({
   worker: {
     id: string;
     name: string;
-    avatar?: string;
+    picture?: string;
     rating: number;
     reviews?: { id: string; comment: string }[];
     skill: string;
@@ -23,9 +23,9 @@ export function WorkerCard({
     >
       <div className="flex items-start">
         <div className="bg-gray-100 rounded-full p-2 mr-3 w-12 h-12 flex items-center justify-center overflow-hidden">
-          {worker.avatar ? (
+          {worker.picture ? (
             <img
-              src={worker.avatar}
+              src={worker.picture}
               alt={worker.name}
               className="w-full h-full object-cover rounded-full"
             />

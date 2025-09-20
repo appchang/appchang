@@ -1,6 +1,11 @@
+import "dotenv/config";
 import express from "express";
+import workersRouter from "./routes/workers.ts";
+import lineRouter from "./routes/line.ts";
 import cors from "cors";
 import { connectDB } from "./db.ts";
+
+console.log("🚀 Starting server..."); // ✅ Step 1
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -12,11 +17,10 @@ app.use(express.json());
 // connect DB
 connectDB();
 
-// routes ตัวอย่าง
-app.get("/", (_req, res) => {
-  res.send("API is running 🚀");
-});
+app.use("/api/workers", workersRouter);
+app.use("/api/line", lineRouter);
 
 app.listen(PORT, () => {
   console.log(`✅ Server listening on http://localhost:${PORT}`);
+  console.log("🔑 LINE_ACCESS_TOKEN:", process.env.LINE_ACCESS_TOKEN);
 });
