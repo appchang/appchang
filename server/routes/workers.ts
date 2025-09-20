@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import Worker from "../models/Worker.ts";
+import Worker from "../models/Worker";
 
 const router = Router();
 

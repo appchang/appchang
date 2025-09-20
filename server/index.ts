@@ -1,9 +1,9 @@
 import "dotenv/config";
 import express from "express";
-import workersRouter from "./routes/workers.ts";
-import lineRouter from "./routes/line.ts";
+import workersRouter from "./routes/workers";
+import lineRouter from "./routes/line";
 import cors from "cors";
-import { connectDB } from "./db.ts";
+import { connectDB } from "./db";
 
 console.log("🚀 Starting server..."); // ✅ Step 1
 
