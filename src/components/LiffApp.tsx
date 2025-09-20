@@ -380,7 +380,7 @@ export function LiffApp() {
   }, [lineAccount]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex flex-col">
+    <div>
       <LoadingOverlay
         active={loading}
         spinner={<FadeLoader color="#36d7b7" />}
@@ -401,201 +401,203 @@ export function LiffApp() {
           }),
         }}
       >
-        <Toaster position="top-right" reverseOrder={false} />
-        {/* Header */}
-        <header className="bg-white shadow-sm py-5 px-4 text-center sticky top-0 z-20">
-          <h1 className="text-2xl font-bold text-[#0061A8]">AppChang Pro</h1>
-          <p className="text-sm text-gray-500">
-            Construction Workforce Platform
-          </p>
-        </header>
+        <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex flex-col">
+          <Toaster position="top-right" reverseOrder={false} />
+          {/* Header */}
+          <header className="bg-white shadow-sm py-5 px-4 text-center sticky top-0 z-20">
+            <h1 className="text-2xl font-bold text-[#0061A8]">AppChang Pro</h1>
+            <p className="text-sm text-gray-500">
+              Construction Workforce Platform
+            </p>
+          </header>
 
-        {/* Main Content */}
-        <main className="flex-grow px-4 py-6 max-w-lg mx-auto w-full">
-          {activeView === "formRegister" && (
-            <div className="mb-6">
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <h2 className="text-xl font-semibold mb-5 text-gray-800">
-                  ลงทะเบียนแรงงาน
-                </h2>
-                <form onSubmit={submitRegister}>
-                  <div className="mb-4">
-                    <label
-                      htmlFor="fullName"
-                      className="block text-sm font-medium text-gray-700 mb-1"
-                    >
-                      ชื่อ-นามสกุล
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <UserIcon size={18} className="text-gray-400" />
-                      </div>
-                      <input
-                        type="text"
-                        id="fullName"
-                        name="fullName"
-                        value={formValues.fullName}
-                        onChange={handleChange}
-                        placeholder="ชื่อ-นามสกุล"
-                        className="w-full pl-10 px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0061A8]"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="mb-4">
-                    <label
-                      htmlFor="skill"
-                      className="block text-sm font-medium text-gray-700 mb-1"
-                    >
-                      ทักษะงาน
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <BriefcaseIcon size={18} className="text-gray-400" />
-                      </div>
-                      <select
-                        id="skill"
-                        name="skill"
-                        value={formValues.skill}
-                        onChange={handleChange}
-                        className="w-full pl-10 px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0061A8] appearance-none bg-no-repeat bg-right"
-                        style={{
-                          backgroundImage:
-                            "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e\")",
-                          backgroundPosition: "right 0.5rem center",
-                          backgroundSize: "1.5em 1.5em",
-                        }}
-                        required
+          {/* Main Content */}
+          <main className="flex-grow px-4 py-6 max-w-lg mx-auto w-full">
+            {activeView === "formRegister" && (
+              <div className="mb-6">
+                <div className="bg-white rounded-lg shadow-md p-6">
+                  <h2 className="text-xl font-semibold mb-5 text-gray-800">
+                    ลงทะเบียนแรงงาน
+                  </h2>
+                  <form onSubmit={submitRegister}>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="fullName"
+                        className="block text-sm font-medium text-gray-700 mb-1"
                       >
-                        <option value="" disabled>
-                          เลือกทักษะงาน
-                        </option>
-                        <option value="ช่างปูน">ช่างปูน</option>
-                        <option value="ช่างไฟฟ้า">ช่างไฟฟ้า</option>
-                        <option value="ช่างเหล็ก">ช่างเหล็ก</option>
-                        <option value="ช่างไม้">ช่างไม้</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="mb-6">
-                    <label
-                      htmlFor="location"
-                      className="block text-sm font-medium text-gray-700 mb-1"
-                    >
-                      พื้นที่ทำงาน
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <MapPinIcon size={18} className="text-gray-400" />
+                        ชื่อ-นามสกุล
+                      </label>
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                          <UserIcon size={18} className="text-gray-400" />
+                        </div>
+                        <input
+                          type="text"
+                          id="fullName"
+                          name="fullName"
+                          value={formValues.fullName}
+                          onChange={handleChange}
+                          placeholder="ชื่อ-นามสกุล"
+                          className="w-full pl-10 px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0061A8]"
+                          required
+                        />
                       </div>
-                      <input
-                        type="text"
-                        id="location"
-                        name="location"
-                        value={formValues.location}
-                        onChange={handleChange}
-                        placeholder="จังหวัด/พื้นที่ทำงาน"
-                        className="w-full pl-10 px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0061A8]"
-                        required
-                      />
                     </div>
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-gradient-to-r from-[#0061A8] to-[#1E88E5] text-white py-3 rounded-lg font-medium hover:from-[#004C85] hover:to-[#1976D2] transition-colors shadow-sm"
-                  >
-                    บันทึกข้อมูล
-                  </button>
-                </form>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="skill"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
+                        ทักษะงาน
+                      </label>
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                          <BriefcaseIcon size={18} className="text-gray-400" />
+                        </div>
+                        <select
+                          id="skill"
+                          name="skill"
+                          value={formValues.skill}
+                          onChange={handleChange}
+                          className="w-full pl-10 px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0061A8] appearance-none bg-no-repeat bg-right"
+                          style={{
+                            backgroundImage:
+                              "url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e\")",
+                            backgroundPosition: "right 0.5rem center",
+                            backgroundSize: "1.5em 1.5em",
+                          }}
+                          required
+                        >
+                          <option value="" disabled>
+                            เลือกทักษะงาน
+                          </option>
+                          <option value="ช่างปูน">ช่างปูน</option>
+                          <option value="ช่างไฟฟ้า">ช่างไฟฟ้า</option>
+                          <option value="ช่างเหล็ก">ช่างเหล็ก</option>
+                          <option value="ช่างไม้">ช่างไม้</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="mb-6">
+                      <label
+                        htmlFor="location"
+                        className="block text-sm font-medium text-gray-700 mb-1"
+                      >
+                        พื้นที่ทำงาน
+                      </label>
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                          <MapPinIcon size={18} className="text-gray-400" />
+                        </div>
+                        <input
+                          type="text"
+                          id="location"
+                          name="location"
+                          value={formValues.location}
+                          onChange={handleChange}
+                          placeholder="จังหวัด/พื้นที่ทำงาน"
+                          className="w-full pl-10 px-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0061A8]"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-full bg-gradient-to-r from-[#0061A8] to-[#1E88E5] text-white py-3 rounded-lg font-medium hover:from-[#004C85] hover:to-[#1976D2] transition-colors shadow-sm"
+                    >
+                      บันทึกข้อมูล
+                    </button>
+                  </form>
+                </div>
               </div>
+            )}
+
+            {activeView === "dashboard" && (
+              <WorkerDashboard
+                workers={workers}
+                onWorkerSelect={handleWorkerSelect}
+                onAssignJob={handleAssignJob}
+              />
+            )}
+
+            {activeView === "profile" && (
+              <WorkerProfile
+                worker={selectedWorker}
+                onBack={() => setActiveView("dashboard")}
+                onAssignJob={handleAssignJob}
+                setLoading={setLoading}
+                showToast={(msg: string) => toast.success(msg)}
+              />
+            )}
+
+            {activeView === "job-assignment" && (
+              <JobAssignmentPage
+                worker={selectedWorker}
+                onBack={() => {
+                  setAssigningJob(false);
+                  setActiveView("profile");
+                }}
+                onSubmit={() => {
+                  setAssigningJob(false);
+                  setActiveView("dashboard");
+                }}
+                setLoading={setLoading}
+                showToast={(msg: string) => toast.success(msg)}
+              />
+            )}
+
+            {activeView === "job-confirmation" && (
+              <WorkerJobConfirmationPage
+                onAccept={() => setActiveView("clock-in-out")}
+                onReject={() => setActiveView("dashboard")}
+              />
+            )}
+
+            {activeView === "clock-in-out" && (
+              <ClockInOutPage onBack={() => setActiveView("dashboard")} />
+            )}
+
+            {activeView === "review" && (
+              <CustomerReviewPage
+                worker={selectedWorker}
+                onSubmit={() => setActiveView("dashboard")}
+              />
+            )}
+          </main>
+
+          {/* Bottom Navigation */}
+          <nav className="bg-white shadow-lg px-4 py-3 sticky bottom-0 border-t border-gray-200">
+            <div className="flex space-x-4">
+              <button
+                onClick={() => setActiveView("formRegister")}
+                className={`flex-1 py-2.5 rounded-lg font-medium text-center shadow-sm flex items-center justify-center ${
+                  activeView === "formRegister"
+                    ? "bg-gradient-to-r from-[#0061A8] to-[#1E88E5] text-white"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
+              >
+                <ClipboardListIcon size={18} className="mr-2" />
+                สมัครแรงงาน
+              </button>
+              <button
+                onClick={() => setActiveView("dashboard")}
+                className={`flex-1 py-2.5 rounded-lg font-medium text-center shadow-sm flex items-center justify-center ${
+                  activeView === "dashboard" ||
+                  activeView === "profile" ||
+                  activeView === "job-assignment" ||
+                  activeView === "job-confirmation" ||
+                  activeView === "clock-in-out" ||
+                  activeView === "review"
+                    ? "bg-gradient-to-r from-[#0061A8] to-[#1E88E5] text-white"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                }`}
+              >
+                <LayoutDashboardIcon size={18} className="mr-2" />
+                Dashboard
+              </button>
             </div>
-          )}
-
-          {activeView === "dashboard" && (
-            <WorkerDashboard
-              workers={workers}
-              onWorkerSelect={handleWorkerSelect}
-              onAssignJob={handleAssignJob}
-            />
-          )}
-
-          {activeView === "profile" && (
-            <WorkerProfile
-              worker={selectedWorker}
-              onBack={() => setActiveView("dashboard")}
-              onAssignJob={handleAssignJob}
-              setLoading={setLoading}
-              showToast={(msg: string) => toast.success(msg)}
-            />
-          )}
-
-          {activeView === "job-assignment" && (
-            <JobAssignmentPage
-              worker={selectedWorker}
-              onBack={() => {
-                setAssigningJob(false);
-                setActiveView("profile");
-              }}
-              onSubmit={() => {
-                setAssigningJob(false);
-                setActiveView("dashboard");
-              }}
-              setLoading={setLoading}
-              showToast={(msg: string) => toast.success(msg)}
-            />
-          )}
-
-          {activeView === "job-confirmation" && (
-            <WorkerJobConfirmationPage
-              onAccept={() => setActiveView("clock-in-out")}
-              onReject={() => setActiveView("dashboard")}
-            />
-          )}
-
-          {activeView === "clock-in-out" && (
-            <ClockInOutPage onBack={() => setActiveView("dashboard")} />
-          )}
-
-          {activeView === "review" && (
-            <CustomerReviewPage
-              worker={selectedWorker}
-              onSubmit={() => setActiveView("dashboard")}
-            />
-          )}
-        </main>
-
-        {/* Bottom Navigation */}
-        <nav className="bg-white shadow-lg px-4 py-3 sticky bottom-0 border-t border-gray-200">
-          <div className="flex space-x-4">
-            <button
-              onClick={() => setActiveView("formRegister")}
-              className={`flex-1 py-2.5 rounded-lg font-medium text-center shadow-sm flex items-center justify-center ${
-                activeView === "formRegister"
-                  ? "bg-gradient-to-r from-[#0061A8] to-[#1E88E5] text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-              }`}
-            >
-              <ClipboardListIcon size={18} className="mr-2" />
-              สมัครแรงงาน
-            </button>
-            <button
-              onClick={() => setActiveView("dashboard")}
-              className={`flex-1 py-2.5 rounded-lg font-medium text-center shadow-sm flex items-center justify-center ${
-                activeView === "dashboard" ||
-                activeView === "profile" ||
-                activeView === "job-assignment" ||
-                activeView === "job-confirmation" ||
-                activeView === "clock-in-out" ||
-                activeView === "review"
-                  ? "bg-gradient-to-r from-[#0061A8] to-[#1E88E5] text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-              }`}
-            >
-              <LayoutDashboardIcon size={18} className="mr-2" />
-              Dashboard
-            </button>
-          </div>
-        </nav>
+          </nav>
+        </div>
       </LoadingOverlay>
     </div>
   );
