@@ -9,6 +9,7 @@ export function JobAssignmentPage({
     id: string;
     name: string;
     avatar?: string;
+    userId: string;
   };
   onBack: () => void;
   onSubmit: () => void;
@@ -27,9 +28,37 @@ export function JobAssignmentPage({
       [name]: value,
     });
   };
-  const handleSubmit = (e: any) => {
+  const submitAssign = async (e: any) => {
     e.preventDefault();
-    console.log("Job assigned:", jobForm);
+
+    console.log("worker : ", worker);
+
+    // แก้ format startDate และ endDate จาก YYYY-MM-DD เป็น DD/MM/YYYY
+    const formatDate = (dateStr: string) => {
+      const [year, month, day] = dateStr.split("-");
+      return `${day}/${month}/${year}`;
+    };
+    const formattedStartDate = formatDate(jobForm.startDate);
+    const formattedEndDate = formatDate(jobForm.endDate);
+
+    try {
+      const res = await fetch("/api/line/push", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: worker.userId,
+          message: `คุณได้รับมอบหมายงานใหม่:\n- ชื่องาน: ${jobForm.title}\n- สถานที่ทำงาน: ${jobForm.location}\n- วันที่เริ่มต้น: ${formattedStartDate}\n- วันที่สิ้นสุด: ${formattedEndDate}\n- งบประมาณ: ${jobForm.budget} บาท`,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to send LINE message");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+    }
+
     onSubmit();
   };
   return (
@@ -47,7 +76,7 @@ export function JobAssignmentPage({
         <h2 className="text-xl font-semibold mb-5 text-gray-800">
           Assign งานให้ {worker?.name || "ช่าง"}
         </h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={submitAssign}>
           <div className="mb-4">
             <label
               htmlFor="title"

@@ -20,6 +20,27 @@ export function WorkerProfile({
   // Handle missing data gracefully
   const reviews = worker.reviews || [];
   const documents = worker.documents || [];
+
+  const sendDirectLineMessage = async () => {
+    try {
+      const res = await fetch("/api/line/push", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: worker.userId,
+          message: "แอดมินต้องการคุยกับคุณเรื่องงาน โปรดตอบกลับข้อความนี้",
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to send LINE message");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+    }
+  };
+
   return (
     <div className="flex flex-col w-full">
       {/* Back Button */}
@@ -147,7 +168,10 @@ export function WorkerProfile({
         Assign งานให้ช่างนี้
       </button>
       {/* Contact Button */}
-      <button className="w-full bg-[#06C755] text-white py-3 rounded-lg font-medium shadow-sm flex items-center justify-center mb-4">
+      <button
+        onClick={sendDirectLineMessage}
+        className="w-full bg-[#06C755] text-white py-3 rounded-lg font-medium shadow-sm flex items-center justify-center mb-4"
+      >
         <PhoneIcon size={18} className="mr-2" />
         ติดต่อทาง LINE
       </button>
