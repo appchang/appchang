@@ -8,21 +8,29 @@ import {
   FileTextIcon,
   PhoneIcon,
 } from "lucide-react";
+
+interface Props {
+  worker: any;
+  onBack: () => void;
+  onAssignJob: () => void;
+  setLoading: (val: boolean) => void; // 👈 รับมาจาก Parent
+  showToast: (msg: string) => void; // 👈 รับมาจาก Parent
+}
+
 export function WorkerProfile({
   worker,
   onBack,
   onAssignJob,
-}: {
-  worker: any;
-  onBack: () => void;
-  onAssignJob: () => void;
-}) {
+  setLoading,
+  showToast,
+}: Props) {
   // Handle missing data gracefully
   const reviews = worker.reviews || [];
   const documents = worker.documents || [];
 
   const sendDirectLineMessage = async () => {
     try {
+      setLoading(true);
       const res = await fetch("/api/line/push", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -34,11 +42,15 @@ export function WorkerProfile({
 
       const data = await res.json();
       if (!res.ok) {
+        showToast("ส่งข้อความทาง LINE ไม่สำเร็จ");
         throw new Error(data.error || "Failed to send LINE message");
       }
     } catch (err) {
       console.error("Error:", err);
+    } finally {
+      setLoading(false);
     }
+    showToast("ส่งข้อความทาง LINE เรียบร้อยแล้ว");
   };
 
   return (

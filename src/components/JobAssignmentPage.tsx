@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { ChevronLeft, Calendar, MapPin, DollarSign } from "lucide-react";
+
+interface Props {
+  worker: any;
+  onBack: () => void;
+  onSubmit: () => void;
+  setLoading: (val: boolean) => void; // 👈 รับมาจาก Parent
+  showToast: (msg: string) => void; // 👈 รับมาจาก Parent
+}
+
 export function JobAssignmentPage({
   worker,
   onBack,
   onSubmit,
-}: {
-  worker: {
-    id: string;
-    name: string;
-    avatar?: string;
-    userId: string;
-  };
-  onBack: () => void;
-  onSubmit: () => void;
-}) {
+  setLoading,
+  showToast,
+}: Props) {
   const [jobForm, setJobForm] = useState({
     title: "",
     startDate: "",
@@ -31,8 +33,6 @@ export function JobAssignmentPage({
   const submitAssign = async (e: any) => {
     e.preventDefault();
 
-    console.log("worker : ", worker);
-
     // แก้ format startDate และ endDate จาก YYYY-MM-DD เป็น DD/MM/YYYY
     const formatDate = (dateStr: string) => {
       const [year, month, day] = dateStr.split("-");
@@ -42,6 +42,7 @@ export function JobAssignmentPage({
     const formattedEndDate = formatDate(jobForm.endDate);
 
     try {
+      setLoading(true);
       const res = await fetch("/api/line/push", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -53,11 +54,16 @@ export function JobAssignmentPage({
 
       const data = await res.json();
       if (!res.ok) {
+        showToast("เกิดข้อผิดพลาด");
         throw new Error(data.error || "Failed to send LINE message");
       }
     } catch (err) {
       console.error("Error:", err);
+    } finally {
+      setLoading(false);
     }
+
+    showToast("ส่งงานให้ช่างเรียบร้อยแล้ว");
 
     onSubmit();
   };
