@@ -23,6 +23,8 @@ export function JobAssignmentPage({
     location: "",
     budget: "",
   });
+
+  const API_URL = process.env.API_URL;
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setJobForm({
@@ -43,7 +45,7 @@ export function JobAssignmentPage({
 
     try {
       setLoading(true);
-      const res = await fetch("/api/line/push", {
+      const res = await fetch(`${API_URL}/api/line/push`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

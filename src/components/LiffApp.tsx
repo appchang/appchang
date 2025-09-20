@@ -18,6 +18,7 @@ import { FadeLoader } from "react-spinners";
 import toast, { Toaster } from "react-hot-toast";
 
 export function LiffApp() {
+  const API_URL = process.env.API_URL;
   // State for form values
   const [formValues, setFormValues] = useState({
     fullName: "",
@@ -256,7 +257,7 @@ export function LiffApp() {
 
     try {
       setLoading(true);
-      const res = await fetch("/api/workers", {
+      const res = await fetch(`${API_URL}/api/workers`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -269,7 +270,7 @@ export function LiffApp() {
         throw new Error(data.error || "Failed to register worker");
       }
       try {
-        const res = await fetch("/api/line/push", {
+        const res = await fetch(`${API_URL}/api/line/push`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -296,7 +297,7 @@ export function LiffApp() {
     // call fetch workers again
     try {
       setLoading(true);
-      const res = await fetch("/api/workers");
+      const res = await fetch(`${API_URL}/api/workers`);
       const data = await res.json();
       setWorkers(data);
     } catch (err) {
@@ -367,7 +368,7 @@ export function LiffApp() {
     const loadWorkers = async () => {
       try {
         setLoading(true);
-        const res = await fetch("/api/workers");
+        const res = await fetch(`${API_URL}/api/workers`);
         const data = await res.json();
         setWorkers(data);
       } catch (err) {
